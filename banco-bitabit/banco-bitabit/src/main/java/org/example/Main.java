@@ -32,7 +32,7 @@ public class Main {
 
         printData_total(extraccion1, transferencia1);
         System.out.println("Fin");
-//test push private
+//test push private 2
     }
 
     private static void printData_total(Extraccion extraccion1, Transferencia transferencia1) {
