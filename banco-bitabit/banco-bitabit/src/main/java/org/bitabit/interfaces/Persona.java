@@ -1,4 +1,4 @@
-package org.example;
+package org.bitabit.interfaces;
 
 public interface Persona {
     public void setNombre(String nombre);

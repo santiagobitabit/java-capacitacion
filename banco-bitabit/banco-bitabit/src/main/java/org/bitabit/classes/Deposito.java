@@ -1,4 +1,4 @@
-package org.example;
+package org.bitabit.classes;
 
 public class Deposito extends Operacion {
     Empleado empleado;
@@ -8,7 +8,7 @@ public class Deposito extends Operacion {
         super(monto, origen);
         this.monto = monto;
         if (this.isValid()) {
-            this.empleado = origen.getEmpleado();
+            this.empleado = origen.getCliente().empleado;
             this.cuenta = origen;
             cuenta.addSaldo(monto);
             empleado.setComision(monto);

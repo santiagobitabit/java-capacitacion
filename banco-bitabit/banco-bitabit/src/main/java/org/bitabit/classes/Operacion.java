@@ -1,12 +1,17 @@
-package org.example;
+package org.bitabit.classes;
 
 public abstract class Operacion {
     protected   int monto;
-    protected   Cuenta origen;
+    protected Cuenta origen;
 
     public Operacion(int monto, Cuenta origen){
         this.monto = monto;
         this.origen = origen;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        return this.monto == ((Operacion)o).monto;
     }
 
     public int getMonto() {

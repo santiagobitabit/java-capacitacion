@@ -1,6 +1,6 @@
-package org.example;
+package org.bitabit.classes;
 
-public class Transferencia extends Operacion{
+public class Transferencia extends Operacion {
     Cuenta destino;
     Cuenta origen;
 

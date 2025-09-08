@@ -1,4 +1,10 @@
-package org.example;
+package org.bitabit.classes;
+
+import java.util.Random;
+import org.bitabit.interfaces.Persona;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente implements Persona {
     String nombre;
@@ -7,62 +13,72 @@ public class Cliente implements Persona {
     String correo;
     String telefono;
     String domicilio;
+    Empleado empleado;
+    String id_empleado;
+    Banco banco;
+    List<Cuenta> cuentas = new ArrayList<Cuenta>();
 
-    public Cliente (String nombre, String apellido, int edad, String correo, String telefono, String domicilio) {
+    public Cliente (String nombre, String apellido, int edad, String correo, String telefono, String domicilio, Banco banco) {
+
+
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.correo = correo;
         this.telefono = telefono;
         this.domicilio = domicilio;
+        this.empleado = banco.getEmpleados().get(id_list_empleado_random(0, (banco.getEmpleados().size() - 1)));
+        this.banco = banco;
+        banco.addCliente(this);
+    }
+    static int id_list_empleado_random(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min + 1) + min;
+    }
+    public void addCuenta(Cuenta cuenta) {
+        cuentas.add(cuenta);
     }
 
-    @Override
+    public List<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    @Override
     public String getNombre() {
         return this.nombre;
     }
 
-    @Override
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
-    @Override
     public String getApellido() {
         return this.apellido;
     }
 
-    @Override
     public void setEmail(String email) {
         this.correo = email;
     }
 
-    @Override
     public String getEmail() {
         return this.correo;
     }
 
-    @Override
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    @Override
     public String getTelefono() {
         return this.telefono;
     }
 
-    @Override
     public int getEdad() {
         return this.edad;
     }
 
-    @Override
     public void setEdad(int edad) {
         this.edad = edad;
     }
@@ -73,5 +89,9 @@ public class Cliente implements Persona {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public String getEmplead_nombre() {
+        return this.empleado.getNombre() + " " + this.empleado.getApellido();
     }
 }

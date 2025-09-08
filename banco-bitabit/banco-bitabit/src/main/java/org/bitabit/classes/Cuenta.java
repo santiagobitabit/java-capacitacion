@@ -1,19 +1,20 @@
-package org.example;
+package org.bitabit.classes;
+
+import org.bitabit.enums.Moneda;
 
 public class Cuenta {
     int id;
     Cliente cliente;
-    Empleado empleado;
     int saldo;
-    String moneda;
+    Moneda moneda;
 
 
-    Cuenta (int id,Cliente cliente, Empleado empleado, String moneda){
+    public Cuenta (int id,Cliente cliente, Moneda moneda){
         this.id = id;
         this.cliente = cliente;
-        this.empleado = empleado;
         this.saldo = 0;
         this.moneda = moneda;
+        cliente.addCuenta(this);
     }
     public int getId() {
         return id;
@@ -27,14 +28,6 @@ public class Cuenta {
         return cliente;
     }
 
-     public Empleado getEmpleado() {
-        return empleado;
-     }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
-
     public int getSaldo() {
         return saldo;
      }
@@ -43,11 +36,11 @@ public class Cuenta {
          this.saldo = saldo;
      }
 
-     public String getMoneda() {
+     public Moneda getMoneda() {
         return moneda;
      }
 
-     public void setMoneda(String moneda) {
+     public void setMoneda(Moneda moneda) {
         this.moneda = moneda;
      }
 
