@@ -44,9 +44,7 @@ public class Cuenta {
         this.moneda = moneda;
      }
 
-     public void addSaldo(int saldo) {
-        this.saldo += saldo;
-     }
+     public void addSaldo(int saldo) { this.saldo += saldo; }
 
      public void subSaldo(int saldo) {
         this.saldo -= saldo;

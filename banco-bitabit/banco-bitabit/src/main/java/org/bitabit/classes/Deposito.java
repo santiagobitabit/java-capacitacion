@@ -8,11 +8,16 @@ public class Deposito extends Operacion {
         super(monto, origen);
         this.monto = monto;
         if (this.isValid()) {
-            this.empleado = origen.getCliente().empleado;
-            this.cuenta = origen;
-            cuenta.addSaldo(monto);
-            empleado.setComision(monto);
-            System.out.println("Depósito exitoso");
+            try {
+                Thread.sleep(0);
+                this.empleado = origen.getCliente().empleado;
+                this.cuenta = origen;
+                cuenta.addSaldo(monto);
+                empleado.setComision(monto);
+                System.out.println("Depósito exitoso");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             System.out.println("Error al validar el deposito");
         }
