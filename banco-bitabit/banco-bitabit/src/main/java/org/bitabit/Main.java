@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -44,7 +46,8 @@ public class Main {
         Cuenta cuenta2 = new Cuenta(2,banco.getCliente().getFirst(),Moneda.PESO);
         Cuenta cuenta3 = new Cuenta(3,banco.getCliente().getLast(),Moneda.EURO);
 
-        threadMethod(cuenta1);
+        //depositosConcurrentes(cuenta1);
+        depositosConcurrentesExecutor(cuenta1);
 //
 //        System.out.println(banco.getCliente().getFirst().getCuentas().getFirst().getId());
 //        System.out.println(banco.getCliente().getFirst().getCuentas().getLast().getId());
@@ -141,11 +144,11 @@ public class Main {
         return consola.input();
     }
 
-    public static void threadMethod(Cuenta cuenta){
+    public static void depositosConcurrentes(Cuenta cuenta){
         System.out.println("Iniciando threads");
         try{
-                Thread thread = new Thread(new ThreadsAndSync(2, cuenta));
-                Thread thread2 = new Thread(new ThreadsAndSync(2, cuenta));
+                Thread thread = new Thread(new DepositosWithThreads(2, cuenta));
+                Thread thread2 = new Thread(new DepositosWithThreads(2, cuenta));
                 thread2.start();
                 thread2.join();
                 thread.start();
@@ -155,5 +158,15 @@ public class Main {
             System.out.println("Se terminó thread.");
             System.out.println("Saldo final cuenta1: " + cuenta.getSaldo());
         }
+    }
+
+    public static void depositosConcurrentesExecutor(Cuenta cuenta){
+        System.out.println("Iniciando threads con exdecutors");
+        var service = Executors.newSingleThreadExecutor();
+        service.submit(new DepositosWithThreads(2,cuenta));
+        service.submit(new DepositosWithThreads(2,cuenta));
+
+        service.shutdown();
+        System.out.println("Saldo final cuenta1: " + cuenta.getSaldo());
     }
 }

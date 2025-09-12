@@ -1,12 +1,10 @@
 package org.bitabit.classes;
 
-import java.io.IOException;
-
-public class ThreadsAndSync implements Runnable {
+public class DepositosWithThreads implements Runnable {
     int limite;
     final Cuenta cuenta;
 
-    public ThreadsAndSync(int limite, Cuenta cuenta) {
+    public DepositosWithThreads(int limite, Cuenta cuenta) {
         this.limite = limite;
         this.cuenta = cuenta;
     }
