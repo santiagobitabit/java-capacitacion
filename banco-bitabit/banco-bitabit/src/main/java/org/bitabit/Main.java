@@ -10,6 +10,7 @@ import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Connection;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.concurrent.Executor;
@@ -23,31 +24,34 @@ public class Main {
         System.out.println("Bienvenido al banco bitAbit");
 
         Banco banco = new Banco("Bitabit");
-        String base_path = System.getProperty("user.dir") + "/src/main/resources/";
-        System.out.println(base_path);
+
+        DB_Connection conexionDB = new DB_Connection();
+
+//        String base_path = System.getProperty("user.dir") + "/src/main/resources/";
+//        System.out.println(base_path);
 //        contratistaTMP();
 //        String testInoput = inputFromConsole();
 //        System.out.println(testInoput);
-        dataEmpleadosBulk inputBulk_empleados = new dataEmpleadosBulk(banco);
-        inputBulk_empleados.ingresarEmpleadosCsv(base_path + "input/empleados.csv");
+//        dataEmpleadosBulk inputBulk_empleados = new dataEmpleadosBulk(banco);
+//        inputBulk_empleados.ingresarEmpleadosCsv(base_path + "input/empleados.csv");
+//////
+//        dataClientesBulk testReadFile = new dataClientesBulk(banco);
+////        byte [] imageInByte =  testReadFile.ingresarImagenClientesBin(base_path + "input/testBin.bin");
+////        testReadFile.descargarImagenClienteBin(imageInByte,base_path + "output/ImageBin.bin");
+//        testReadFile.ingresarClientesCsv(base_path + "input/clientes.csv");
 ////
-        dataClientesBulk testReadFile = new dataClientesBulk(banco);
-//        byte [] imageInByte =  testReadFile.ingresarImagenClientesBin(base_path + "input/testBin.bin");
-//        testReadFile.descargarImagenClienteBin(imageInByte,base_path + "output/ImageBin.bin");
-        testReadFile.ingresarClientesCsv(base_path + "input/clientes.csv");
+////        dataClientesBulk inputImageBin = new dataClientesBulk(banco);
+////        for (Cliente cliente : banco.getCliente()) {
+////            System.out.println(cliente.getNombre() + " " + cliente.getApellido() + " - " + cliente.getEmplead_nombre() + " // ");
+////        }
+////
+//        //Crear nueva cuenta
+//        Cuenta cuenta1 = new Cuenta(1,banco.getCliente().getFirst(), Moneda.PESO);
+//        Cuenta cuenta2 = new Cuenta(2,banco.getCliente().getFirst(),Moneda.PESO);
+//        Cuenta cuenta3 = new Cuenta(3,banco.getCliente().getLast(),Moneda.EURO);
 //
-//        dataClientesBulk inputImageBin = new dataClientesBulk(banco);
-//        for (Cliente cliente : banco.getCliente()) {
-//            System.out.println(cliente.getNombre() + " " + cliente.getApellido() + " - " + cliente.getEmplead_nombre() + " // ");
-//        }
-//
-        //Crear nueva cuenta
-        Cuenta cuenta1 = new Cuenta(1,banco.getCliente().getFirst(), Moneda.PESO);
-        Cuenta cuenta2 = new Cuenta(2,banco.getCliente().getFirst(),Moneda.PESO);
-        Cuenta cuenta3 = new Cuenta(3,banco.getCliente().getLast(),Moneda.EURO);
-
-        //depositosConcurrentes(cuenta1);
-        depositosConcurrentesExecutor(cuenta1);
+//      //  depositosConcurrentes(cuenta1);
+//        depositosConcurrentesExecutor(cuenta1);
 //
 //        System.out.println(banco.getCliente().getFirst().getCuentas().getFirst().getId());
 //        System.out.println(banco.getCliente().getFirst().getCuentas().getLast().getId());
@@ -131,6 +135,16 @@ public class Main {
 
             @Override
             public void setEdad(int edad) {
+
+            }
+
+            @Override
+            public String getDomicilio() {
+                return "";
+            }
+
+            @Override
+            public void setDomicilio(String domicilio) {
 
             }
         }.setNombre("test");

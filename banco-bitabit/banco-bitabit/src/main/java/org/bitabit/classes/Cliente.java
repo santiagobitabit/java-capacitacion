@@ -20,7 +20,6 @@ public class Cliente implements Persona {
 
     public Cliente (String nombre, String apellido, int edad, String correo, String telefono, String domicilio, Banco banco) {
 
-
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -34,6 +33,9 @@ public class Cliente implements Persona {
     static int id_list_empleado_random(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min + 1) + min;
+    }
+    public Empleado getEmpleado() {
+        return this.empleado;
     }
     public void addCuenta(Cuenta cuenta) {
         cuentas.add(cuenta);

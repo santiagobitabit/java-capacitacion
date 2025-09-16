@@ -21,7 +21,7 @@ public class dataClientesBulk {
             while (linea != null) {
                 // System.out.println(linea);
                 List<String> lista = Arrays.asList(linea.split(";"));
-                new Cliente(lista.get(0), lista.get(1), Integer.parseInt(lista.get(2)), lista.get(3), lista.get(4), lista.get(5), this.banco);
+                new Cliente(lista.get(0), lista.get(1),Integer.parseInt(lista.get(2)), lista.get(3), lista.get(4), lista.get(5), this.banco);
                 linea = br.readLine();
             }
 

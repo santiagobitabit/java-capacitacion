@@ -36,7 +36,12 @@ public class dataEmpleadosBulk {
                 String telefono = csvRecord.get("telefono");
                 Integer sueldo = Integer.parseInt(csvRecord.get("sueldo"));
                 try{
-                    new Empleado(nombre,apellido,Integer.parseInt(edad),email,telefono,sueldo,this.banco);
+                    DB_Connection conexionDB = new DB_Connection();
+
+                    Empleado empleadoNuevo =  new Empleado(nombre,apellido,Integer.parseInt(edad),email,telefono,sueldo,this.banco);
+                    if (empleadoNuevo != null) {
+                        conexionDB.addEmpleado_DB(empleadoNuevo);
+                    }
                 } catch (Exception e){
                     e.printStackTrace();
                 }

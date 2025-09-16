@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Empleado implements Persona {
+    private int id_empleado;
     String nombre;
     String apellido;
     int edad;
@@ -31,6 +32,11 @@ public class Empleado implements Persona {
         this.banco = banco;
         banco.addEmpleado(this);
     }
+
+    public int getId_empleado() { return this.id_empleado; }
+
+    public void setId_empleado(int id_empleado) { this.id_empleado = id_empleado; }
+
     public void addCliente(Cliente cliente) {
         clientes.add(cliente);
     }
@@ -76,6 +82,16 @@ public class Empleado implements Persona {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    @Override
+    public String getDomicilio() {
+        return "";
+    }
+
+    @Override
+    public void setDomicilio(String domicilio) {
+
     }
 
     public void setSueldo(int sueldo) { this.sueldo = sueldo; }
