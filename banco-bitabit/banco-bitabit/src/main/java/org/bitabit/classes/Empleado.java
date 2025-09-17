@@ -104,6 +104,10 @@ public class Empleado implements Persona {
         this.comision = monto * 0.1;;
     }
 
+    public void setComisionTotal(double comision) {
+        this.comision = comision;;
+    }
+
     public double getComision() {
         return this.comision;
     }

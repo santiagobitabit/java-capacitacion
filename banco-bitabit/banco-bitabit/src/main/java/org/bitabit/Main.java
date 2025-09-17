@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.concurrent.Executor;
@@ -24,21 +25,27 @@ public class Main {
         System.out.println("Bienvenido al banco bitAbit");
 
         Banco banco = new Banco("Bitabit");
-
         DB_Connection conexionDB = new DB_Connection();
+        try {
+            conexionDB.printData();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+//
+        String base_path = System.getProperty("user.dir") + "/src/main/resources/";
+        System.out.println(base_path);
+////        contratistaTMP();
+////        String testInoput = inputFromConsole();
+////        System.out.println(testInoput);
+        dataEmpleadosBulk inputBulk_empleados = new dataEmpleadosBulk(banco);
+        inputBulk_empleados.ingresarEmpleadosCsv(base_path + "input/empleados.csv");
+////////
+        dataClientesBulk testReadFile = new dataClientesBulk(banco);
+        testReadFile.ingresarClientesCsv(base_path + "input/clientes.csv");
 
-//        String base_path = System.getProperty("user.dir") + "/src/main/resources/";
-//        System.out.println(base_path);
-//        contratistaTMP();
-//        String testInoput = inputFromConsole();
-//        System.out.println(testInoput);
-//        dataEmpleadosBulk inputBulk_empleados = new dataEmpleadosBulk(banco);
-//        inputBulk_empleados.ingresarEmpleadosCsv(base_path + "input/empleados.csv");
-//////
-//        dataClientesBulk testReadFile = new dataClientesBulk(banco);
-////        byte [] imageInByte =  testReadFile.ingresarImagenClientesBin(base_path + "input/testBin.bin");
-////        testReadFile.descargarImagenClienteBin(imageInByte,base_path + "output/ImageBin.bin");
-//        testReadFile.ingresarClientesCsv(base_path + "input/clientes.csv");
+//        byte [] imageInByte =  testReadFile.ingresarImagenClientesBin(base_path + "input/testBin.bin");
+//        testReadFile.descargarImagenClienteBin(imageInByte,base_path + "output/ImageBin.bin");
+
 ////
 ////        dataClientesBulk inputImageBin = new dataClientesBulk(banco);
 ////        for (Cliente cliente : banco.getCliente()) {

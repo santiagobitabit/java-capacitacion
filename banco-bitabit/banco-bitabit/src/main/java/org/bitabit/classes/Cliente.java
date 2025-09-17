@@ -26,13 +26,23 @@ public class Cliente implements Persona {
         this.correo = correo;
         this.telefono = telefono;
         this.domicilio = domicilio;
-        this.empleado = banco.getEmpleados().get(id_list_empleado_random(0, (banco.getEmpleados().size() - 1)));
+        this.empleado = getEmpleado_random(banco);
         this.banco = banco;
         banco.addCliente(this);
     }
-    static int id_list_empleado_random(int min, int max) {
+    static Empleado getEmpleado_random(Banco banco) {
+        DB_Connection conexionDB = new DB_Connection();
+        List<Empleado> empleadoList = conexionDB.getAllEmpleados_DB(banco);
+
+        if (empleadoList.isEmpty()) {
+            System.out.println("No hay empleados en la base de datos.");
+            return null;
+        }
+
         Random random = new Random();
-        return random.nextInt(max - min + 1) + min;
+        int indiceAleatorio = random.nextInt(empleadoList.size());
+
+        return empleadoList.get(indiceAleatorio);
     }
     public Empleado getEmpleado() {
         return this.empleado;

@@ -27,6 +27,7 @@ public class dataEmpleadosBulk {
             // Obtener el mapa de cabeceras (columna -> índice)
             Map<String, Integer> headers = csvParser.getHeaderMap();
             // Iterar sobre cada registro (fila) del CSV
+            DB_Connection conexionDB = new DB_Connection();
             for (CSVRecord csvRecord : csvParser) {
                 // Obtener valores por nombre de columna
                 String nombre = csvRecord.get("nombre");
@@ -36,12 +37,10 @@ public class dataEmpleadosBulk {
                 String telefono = csvRecord.get("telefono");
                 Integer sueldo = Integer.parseInt(csvRecord.get("sueldo"));
                 try{
-                    DB_Connection conexionDB = new DB_Connection();
+
 
                     Empleado empleadoNuevo =  new Empleado(nombre,apellido,Integer.parseInt(edad),email,telefono,sueldo,this.banco);
-                    if (empleadoNuevo != null) {
-                        conexionDB.addEmpleado_DB(empleadoNuevo);
-                    }
+                    if (empleadoNuevo != null) conexionDB.addEmpleado_DB(empleadoNuevo);
                 } catch (Exception e){
                     e.printStackTrace();
                 }

@@ -18,10 +18,12 @@ public class dataClientesBulk {
             FileReader fr = new FileReader(path);
             BufferedReader br = new BufferedReader(fr);
             String linea = br.readLine();
+            DB_Connection conexionDB = new DB_Connection();
             while (linea != null) {
                 // System.out.println(linea);
                 List<String> lista = Arrays.asList(linea.split(";"));
-                new Cliente(lista.get(0), lista.get(1),Integer.parseInt(lista.get(2)), lista.get(3), lista.get(4), lista.get(5), this.banco);
+                Cliente clienteNuevo = new Cliente(lista.get(0), lista.get(1),Integer.parseInt(lista.get(2)), lista.get(3), lista.get(4), lista.get(5), this.banco);
+                if (clienteNuevo != null) conexionDB.addCliente_DB(clienteNuevo);
                 linea = br.readLine();
             }
 
