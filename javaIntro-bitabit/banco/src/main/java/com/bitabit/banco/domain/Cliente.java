@@ -14,7 +14,7 @@ public class Cliente {
     private String correo;
     private String telefono;
     private String domicilio;
-    private Long id_empleado;
+    private int id_empleado;
 
     // Getters y Setters
 
@@ -74,11 +74,11 @@ public class Cliente {
         this.domicilio = domicilio;
     }
 
-    public Long getId_empleado() {
+    public int getId_empleado() {
         return id_empleado;
     }
 
-    public void setId_empleado(Long id_empleado) {
+    public void setId_empleado(int id_empleado) {
         this.id_empleado = id_empleado;
     }
 }

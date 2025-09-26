@@ -1,4 +1,4 @@
-package com.bitabit.banco.application;
+package com.bitabit.banco;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

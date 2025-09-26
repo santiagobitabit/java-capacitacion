@@ -4,11 +4,12 @@ import com.bitabit.banco.domain.Empleado;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmpleadosPortOut {
     public void save(Empleado empleado);
-    public Empleado update(Empleado empleado);
-    public void deleteById(String id);
+    public Empleado update(int id, Empleado empleado);
+    public void deleteById(int id);
     public List<Empleado> getAll();
-    public Empleado getById(@RequestParam String id);
+    public Optional<Empleado> getById(int id);
 }

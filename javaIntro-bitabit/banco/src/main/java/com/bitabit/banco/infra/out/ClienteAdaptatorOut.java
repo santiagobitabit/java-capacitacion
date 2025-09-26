@@ -3,7 +3,8 @@ package com.bitabit.banco.infra.out;
 import com.bitabit.banco.domain.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.ResponseEntity;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -24,21 +25,29 @@ public class ClienteAdaptatorOut implements ClientePortOut {
     }
 
 
-    public void save(Cliente cliente) {
+    public String save(Cliente cliente) {
         try {
-            String sqlString = "insert into clientes (nombre, apellido, edad, correo, telefono, domicilio) values (?,?,?,?,?,?)";
-            jdbcTemplate.update(sqlString, cliente.getNombre(), cliente.getApellido(), cliente.getEdad(), cliente.getCorreo(), cliente.getTelefono(), cliente.getDomicilio());
+            System.out.println("Cliente a gusradar: " + cliente.getApellido() + " - " + cliente.getId_empleado());
+            String sqlString = "insert into clientes (nombre, apellido, edad, correo, telefono, domicilio, id_empleado) values (?,?,?,?,?,?,?)";
+            jdbcTemplate.update(sqlString, cliente.getNombre(), cliente.getApellido(), cliente.getEdad(), cliente.getCorreo(), cliente.getTelefono(), cliente.getDomicilio(), cliente.getId_empleado());
+            return "Cliente creado exitosamente";
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("El empleado asociado no existe");
+            return "El empleado asociado no existe";
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
 
-    public Cliente update(int id, Cliente cliente) {
+    public String update(int id, Cliente cliente) {
         try {
-            String sqlString = "UPDATE clientes SET nombre = ?, apellido = ?, edad = ?, correo = ?, telefono = ?, domicilio = ? WHERE id = ?";
-            jdbcTemplate.update(sqlString,cliente.getNombre(), cliente.getApellido(), cliente.getEdad(), cliente.getCorreo(), cliente.getTelefono(), cliente.getDomicilio(), id);
-            return cliente;
+            String sqlString = "UPDATE clientes SET nombre = ?, apellido = ?, edad = ?, correo = ?, telefono = ?, domicilio = ?, id_empleado = ? WHERE id_cliente = ?";
+            jdbcTemplate.update(sqlString, cliente.getNombre(), cliente.getApellido(), cliente.getEdad(), cliente.getCorreo(), cliente.getTelefono(), cliente.getDomicilio(), cliente.getId_empleado(), id);
+            return "Cliente actualizado correctamente";
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("El empleado asociado no existe");
+            return "El empleado asociado no existe";
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +55,7 @@ public class ClienteAdaptatorOut implements ClientePortOut {
 
     public void deleteById(int id) {
         try {
-            String sqlString = "DELETE FROM clientes WHERE id = ?";
+            String sqlString = "DELETE FROM clientes WHERE id_cliente = ?";
             jdbcTemplate.update(sqlString, id);
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
@@ -56,28 +65,37 @@ public class ClienteAdaptatorOut implements ClientePortOut {
 
     @Override
     public List<Cliente> getAll() {
-        String sqlString = "SELECT id, nombre, apellido, edad, correo, telefono, sueldo FROM clientes";
-        List listaClientes = jdbcTemplate.query(sqlString, new ClienteRowMapper());
+        String sqlString = "SELECT id_cliente, nombre, apellido, edad, correo, telefono, domicilio, id_empleado FROM clientes";
+        List<Cliente> listaClientes = jdbcTemplate.query(sqlString, new ClienteRowMapper());
         return listaClientes;
     }
 
     @Override
-    public Cliente getById(int id) {
-        String sqlString = "SELECT id, nombre, apellido, edad, correo, telefono, sueldo FROM clientes WHERE id = ?";
-        Cliente cliente = jdbcTemplate.queryForObject(sqlString, new ClienteRowMapper(), id);
-        return cliente;
+    public Optional<Cliente> getById(int id) {
+        try {
+            String sqlString = "SELECT id_cliente, nombre, apellido, edad, correo, telefono, domicilio, id_empleado FROM clientes WHERE id_cliente = ?";
+            Optional<Cliente> cliente = Optional.ofNullable(jdbcTemplate.queryForObject(sqlString, new ClienteRowMapper(), id));
+            return cliente;
+        } catch (EmptyResultDataAccessException e){
+            System.out.println("Cliente no encontrado con id: " + id);
+            return Optional.empty();
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static final class ClienteRowMapper implements RowMapper<Cliente> {
         @Override
         public Cliente mapRow(ResultSet rs, int rowNum) throws SQLException {
             Cliente cliente = new Cliente();
-            cliente.setId_cliente(rs.getInt("id"));
+            cliente.setId_cliente(rs.getInt("id_cliente"));
             cliente.setNombre(rs.getString("nombre"));
             cliente.setApellido(rs.getString("apellido"));
             cliente.setEdad(rs.getInt("edad"));
             cliente.setCorreo(rs.getString("correo"));
             cliente.setTelefono(rs.getString("telefono"));
+            cliente.setDomicilio(rs.getString("domicilio"));
+            cliente.setId_empleado(rs.getInt(("id_empleado")));
             return cliente;
         }
     }

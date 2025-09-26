@@ -1,4 +1,4 @@
-package com.bitabit.banco.application;
+package com.bitabit.banco;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

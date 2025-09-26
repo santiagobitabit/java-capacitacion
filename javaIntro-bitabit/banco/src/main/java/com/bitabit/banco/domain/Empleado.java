@@ -13,7 +13,6 @@ public class Empleado {
     private String telefono;
     private int sueldo;
     private double comision;
-    private Empleado empleado;
 
     public int getId_empleado() {
         return id_empleado;
@@ -47,9 +46,6 @@ public class Empleado {
         return comision;
     }
 
-    public Empleado getEmpleado() {
-        return empleado;
-    }
 
     public void setId_empleado(int id_empleado) {
         this.id_empleado = id_empleado;
@@ -81,9 +77,5 @@ public class Empleado {
 
     public void setComision(double comision) {
         this.comision = comision;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
     }
 }
