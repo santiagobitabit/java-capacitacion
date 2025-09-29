@@ -1,7 +1,7 @@
 package com.bitabit.banco.infra.in;
 
-import com.bitabit.banco.domain.Cliente;
-import com.bitabit.banco.domain.Empleado;
+import com.bitabit.banco.domain.model.Cliente;
+import com.bitabit.banco.domain.model.Empleado;
 import com.bitabit.banco.infra.out.ClienteAdaptatorOut;
 import com.bitabit.banco.infra.out.EmpleadoAdaptadorOut;
 import org.springframework.http.HttpStatus;

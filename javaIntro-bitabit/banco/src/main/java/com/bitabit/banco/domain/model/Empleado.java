@@ -1,4 +1,4 @@
-package com.bitabit.banco.domain;
+package com.bitabit.banco.domain.model;
 
 
 import org.springframework.stereotype.Component;

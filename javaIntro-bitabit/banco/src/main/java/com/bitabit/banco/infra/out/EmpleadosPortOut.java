@@ -1,7 +1,6 @@
 package com.bitabit.banco.infra.out;
 
-import com.bitabit.banco.domain.Empleado;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.bitabit.banco.domain.model.Empleado;
 
 import java.util.List;
 import java.util.Optional;

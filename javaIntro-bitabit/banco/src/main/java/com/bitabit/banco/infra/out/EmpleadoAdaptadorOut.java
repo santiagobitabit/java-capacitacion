@@ -1,6 +1,6 @@
 package com.bitabit.banco.infra.out;
 
-import com.bitabit.banco.domain.Empleado;
+import com.bitabit.banco.domain.model.Empleado;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

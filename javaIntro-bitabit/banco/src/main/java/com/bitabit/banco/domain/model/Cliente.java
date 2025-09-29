@@ -1,6 +1,5 @@
-package com.bitabit.banco.domain;
+package com.bitabit.banco.domain.model;
 
-// Asumiendo el uso de JPA para la persistencia
 import org.springframework.stereotype.Component;
 
 @Component

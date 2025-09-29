@@ -1,7 +1,6 @@
 package com.bitabit.banco.infra.in;
 
-import com.bitabit.banco.domain.Cliente;
-import com.bitabit.banco.domain.Empleado;
+import com.bitabit.banco.domain.model.Cliente;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

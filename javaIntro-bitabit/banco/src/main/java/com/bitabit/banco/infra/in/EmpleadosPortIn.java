@@ -1,8 +1,7 @@
 package com.bitabit.banco.infra.in;
 
-import com.bitabit.banco.domain.Empleado;
+import com.bitabit.banco.domain.model.Empleado;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;

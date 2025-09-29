@@ -1,6 +1,6 @@
 package com.bitabit.banco.infra.out;
 
-import com.bitabit.banco.domain.Cliente;
+import com.bitabit.banco.domain.model.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
