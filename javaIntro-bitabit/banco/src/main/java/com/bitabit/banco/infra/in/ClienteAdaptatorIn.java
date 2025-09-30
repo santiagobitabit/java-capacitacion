@@ -21,6 +21,7 @@ public class ClienteAdaptatorIn implements ClientePortIn {
     public ClienteAdaptatorIn(ClienteAdaptatorOut clienteAdaptatorOut, EmpleadoAdaptadorOut empleadoAdaptadorOut) {
         this.clienteAdaptatorOut = clienteAdaptatorOut;
         this.empleadoAdaptadorOut = empleadoAdaptadorOut;
+
     }
 
     @Override
@@ -33,7 +34,7 @@ public class ClienteAdaptatorIn implements ClientePortIn {
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Cliente>> getClienteById(@PathVariable int id) {
-         Optional<Cliente> cliente = clienteAdaptatorOut.getById(id);
+        Optional<Cliente> cliente = clienteAdaptatorOut.getById(id);
         return ResponseEntity.ok().body(cliente);
     }
 
