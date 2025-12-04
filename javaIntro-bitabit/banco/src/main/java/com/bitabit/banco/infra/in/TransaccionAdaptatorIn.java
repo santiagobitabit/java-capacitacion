@@ -13,25 +13,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/transacciones")
 public class TransaccionAdaptatorIn implements TransaccionPortIn {
 
-    private TransaccionAdaptatorOut transaccionAdaptatorOut;
-    private Transaccion transaccionClass;
-    private KafkaTemplate<String, String> kafkaTemplate;
+   private TransaccionAdaptatorOut transaccionAdaptatorOut;
+   private Transaccion transaccionClass;
+   private KafkaTemplate<String, String> kafkaTemplate;
 
-    public TransaccionAdaptatorIn(TransaccionAdaptatorOut transaccionAdaptatorOut, Transaccion transaccion, KafkaTemplate<String, String> kafkaTemplate) {
-        this.transaccionAdaptatorOut = transaccionAdaptatorOut;
-        this.transaccionClass = transaccion;
-        this.kafkaTemplate = kafkaTemplate;
-    }
+   public TransaccionAdaptatorIn(TransaccionAdaptatorOut transaccionAdaptatorOut, Transaccion transaccion,
+         KafkaTemplate<String, String> kafkaTemplate) {
+      this.transaccionAdaptatorOut = transaccionAdaptatorOut;
+      this.transaccionClass = transaccion;
+      this.kafkaTemplate = kafkaTemplate;
+   }
 
+   /**
+    * public TransaccionAdaptatorIn(TransaccionAdaptatorOut
+    * transaccionAdaptatorOut, Transaccion transaccion) {
+    * this.transaccionAdaptatorOut = transaccionAdaptatorOut;
+    * this.transaccionClass = transaccion;
+    * }
+    */
 
-    @Override
-    @PostMapping("/deposito")
-    public String realizarDeposito(@RequestBody NuevoDepositoAPI nuevoDepositoAPI) {
-        String resultado = this.transaccionClass.Deposito(nuevoDepositoAPI.getCbuCuentaDestino(), nuevoDepositoAPI.getMonto());
-        String resultadoDB = transaccionAdaptatorOut.save(this.transaccionClass);
-        this.kafkaTemplate.send("bitabit-topic","Depósito realizado");
-        return resultado;
-    }
-
+   @Override
+   @PostMapping("/deposito")
+   public String realizarDeposito(@RequestBody NuevoDepositoAPI nuevoDepositoAPI) {
+      String resultado = this.transaccionClass.Deposito(nuevoDepositoAPI.getCbuCuentaDestino(),
+            nuevoDepositoAPI.getMonto());
+      String resultadoDB = transaccionAdaptatorOut.save(this.transaccionClass);
+      this.kafkaTemplate.send("bitabit-topic-string", "Depósito realizado");
+      return resultado;
+   }
 
 }

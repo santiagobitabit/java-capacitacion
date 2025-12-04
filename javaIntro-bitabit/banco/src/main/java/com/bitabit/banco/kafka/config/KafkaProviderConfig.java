@@ -1,4 +1,4 @@
-package com.bitabit.banco.kafka.config;
+/**package com.bitabit.banco.kafka.config;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -36,4 +36,4 @@ public class KafkaProviderConfig {
         return new KafkaTemplate<>(producerFactory);
     }
 
-}
+}*/

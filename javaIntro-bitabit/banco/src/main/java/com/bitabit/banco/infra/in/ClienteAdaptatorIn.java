@@ -34,6 +34,7 @@ public class ClienteAdaptatorIn implements ClientePortIn {
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Cliente>> getClienteById(@PathVariable int id) {
+        System.out.println("get cliente por id invocado");
         Optional<Cliente> cliente = clienteAdaptatorOut.getById(id);
         return ResponseEntity.ok().body(cliente);
     }
